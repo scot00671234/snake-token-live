@@ -1,0 +1,32 @@
+FROM ubuntu:22.04
+
+# Avoid interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install all required packages for streaming
+RUN apt-get update && apt-get install -y \
+    xvfb \
+    ffmpeg \
+    chromium-browser \
+    pulseaudio \
+    curl \
+    supervisor \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create directory for supervisor config
+RUN mkdir -p /var/log/supervisor
+
+# Copy the streaming script
+COPY scripts/stream-setup.sh /usr/local/bin/stream-setup.sh
+COPY scripts/monitor-stream.sh /usr/local/bin/monitor-stream.sh
+COPY scripts/supervisor.conf /etc/supervisor/conf.d/streaming.conf
+
+# Make scripts executable
+RUN chmod +x /usr/local/bin/stream-setup.sh
+RUN chmod +x /usr/local/bin/monitor-stream.sh
+
+# Set environment variables
+ENV DISPLAY=:1
+
+# Start supervisor to manage all processes
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
