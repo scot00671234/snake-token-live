@@ -102,7 +102,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
         data: currentGameState
       });
 
-      res.json({ success: true, gameId: game.id });
+      // Auto-start pump.fun polling for the configured token
+      const PUMP_FUN_TOKEN = '2ZwUG529hiMr11T7d1zSHzGb1wz5oLA2g22LsfMepump';
+      console.log(`Auto-starting pump.fun polling for token: ${PUMP_FUN_TOKEN}`);
+      
+      try {
+        // Start pump.fun polling automatically
+        setTimeout(async () => {
+          try {
+            await axios.post(`http://localhost:5000/api/pump-fun/start-polling/${PUMP_FUN_TOKEN}`, {
+              gameId: game.id
+            }, {
+              timeout: 5000
+            });
+            console.log('Pump.fun polling started successfully');
+          } catch (pollError) {
+            console.error('Failed to start pump.fun polling:', pollError);
+          }
+        }, 1000); // Delay 1 second to ensure game is fully started
+      } catch (error) {
+        console.error('Error initiating pump.fun polling:', error);
+      }
+
+      res.json({ success: true, gameId: game.id, pumpFunIntegration: true });
     } catch (error) {
       console.error('Error starting game:', error);
       res.status(500).json({ error: 'Failed to start game' });
@@ -484,53 +506,52 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // For MVP, we'll set up a simple interval to poll comments
       const pollInterval = setInterval(async () => {
         try {
-          const response = await axios.get(
-            `https://frontend-api-v3.pump.fun/coins/${mintAddress}/replies`,
-            {
-              headers: {
-                'Accept': 'application/json',
-                'Origin': 'https://pump.fun'
-              },
-              timeout: 5000
-            }
-          );
+          // Use our internal API endpoint with fallback strategies
+          const response = await axios.get(`http://localhost:5000/api/pump-fun/comments/${mintAddress}`, {
+            timeout: 5000
+          });
           
           const comments = response.data;
           if (comments && comments.length > 0) {
-            const latestComment = comments[0];
-            const command = parseCommand(latestComment.text || latestComment.content || '');
-            
-            if (command && currentGameState && currentGameState.isActive && currentGameState.gameId === gameId) {
-              // Process the command
-              currentGameState.direction = command as any;
-              
-              // Broadcast command
-              broadcast({
-                type: 'commandReceived',
-                data: { 
-                  command, 
-                  comment: {
-                    username: latestComment.user?.username || 'pump.fun user',
-                    originalText: latestComment.text || latestComment.content,
-                    source: 'pump.fun'
+            // Process all recent comments (not just the latest)
+            for (const comment of comments) {
+              if (comment.isValid && comment.command && currentGameState && currentGameState.isActive && currentGameState.gameId === gameId) {
+                console.log(`Processing pump.fun command: ${comment.command} from ${comment.username}`);
+                
+                // Process the command
+                currentGameState.direction = comment.command as any;
+                
+                // Broadcast command
+                broadcast({
+                  type: 'commandReceived',
+                  data: { 
+                    command: comment.command, 
+                    comment: {
+                      username: comment.username,
+                      originalText: comment.originalText,
+                      source: comment.source
+                    }
                   }
-                }
-              });
-              
-              // Store comment in our database
-              await storage.createComment({
-                gameId,
-                username: latestComment.user?.username || 'pump.fun user',
-                originalText: latestComment.text || latestComment.content || '',
-                command,
-                isValid: true
-              });
+                });
+                
+                // Store comment in our database
+                await storage.createComment({
+                  gameId,
+                  username: comment.username,
+                  originalText: comment.originalText,
+                  command: comment.command,
+                  isValid: true
+                });
+                
+                // Break after processing first valid command to avoid rapid direction changes
+                break;
+              }
             }
           }
         } catch (error) {
           console.error('Error in pump.fun polling:', error);
         }
-      }, 5000); // Poll every 5 seconds
+      }, 3000); // Poll every 3 seconds for faster response
       
       // In production, store this interval ID in a database or cache
       // For MVP, we'll let it run indefinitely
