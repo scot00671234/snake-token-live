@@ -188,7 +188,7 @@ export default function Game() {
                     data-testid="button-test-pump-fun"
                     onClick={async () => {
                       try {
-                        const mintAddress = "2q7jMwWYFxUdxBqWbi8ohztyG1agjQMrasUXwqGCpump";
+                        const mintAddress = "2ZwUG529hiMr11T7d1zSHzGb1wz5oLA2g22LsfMepump";
                         const response = await fetch(`/api/pump-fun/comments/${mintAddress}`);
                         const data = await response.json();
                         console.log("Pump.fun response:", data);
@@ -207,7 +207,7 @@ export default function Game() {
                   Endpoint: <span className="font-mono">/api/pump-fun/comments</span>
                 </div>
                 <a 
-                  href="https://pump.fun/2q7jMwWYFxUdxBqWbi8ohztyG1agjQMrasUXwqGCpump" 
+                  href="https://pump.fun/2ZwUG529hiMr11T7d1zSHzGb1wz5oLA2g22LsfMepump" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-xs text-primary hover:text-primary/80"
@@ -242,7 +242,7 @@ export default function Game() {
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-muted-foreground">Contract:</span>
-              <span className="font-mono text-xs text-primary">2q7jMwWYFxUdxBqWbi8ohztyG1agjQMrasUXwqGCpump</span>
+              <span className="font-mono text-xs text-primary">2ZwUG529hiMr11T7d1zSHzGb1wz5oLA2g22LsfMepump</span>
               <span className="text-muted-foreground">|</span>
               <span className="text-muted-foreground">Hosted on VPS via DoKploy</span>
             </div>
