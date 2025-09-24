@@ -1,0 +1,44 @@
+Deployment
+See all the details of this deployment | 
+
+Initializing deployment
+Clonning Repo github.com/scot00671234/snake-token-live.git to /etc/dokploy/compose/pump-streamer-strjiw/code: ✅
+Cloning into '/etc/dokploy/compose/pump-streamer-strjiw/code'...
+remote: Enumerating objects: 140, done.
+Cloned github.com/scot00671234/snake-token-live.git: ✅
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║ App Name: pump-streamer-strjiw                                               ║
+║ Build Compose 🐳                                                             ║
+║ Detected: 0 mounts 📂                                                        ║
+║ Command: docker compose -p pump-streamer-strjiw -f                           ║
+║ ./docker-compose.streaming.yml up -d --build --remove-orphans                ║
+║ Source Type: docker github ✅                                                ║
+║ Compose Type: docker-compose ✅                                              ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+time="2025-09-24T10:46:37Z" level=warning msg="/etc/dokploy/compose/pump-streamer-strjiw/code/docker-compose.streaming.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.10kB done
+#1 DONE 0.0s
+#2 [pump-streamer internal] load build definition from Dockerfile.streamer
+#2 transferring dockerfile: 39B
+#2 transferring dockerfile: 945B done
+#2 DONE 0.0s
+#3 [pump-streamer internal] load metadata for docker.io/library/ubuntu:22.04
+#3 DONE 0.0s
+#4 [snake-app internal] load build definition from Dockerfile
+#4 transferring dockerfile: 2B 0.0s done
+#4 DONE 0.0s
+#5 [pump-streamer internal] load .dockerignore
+#5 transferring context: 2B 0.0s done
+#5 DONE 0.0s
+#6 [pump-streamer 1/8] FROM docker.io/library/ubuntu:22.04
+#6 DONE 0.0s
+#7 [pump-streamer internal] load build context
+#7 CANCELED
+#8 [pump-streamer 2/8] RUN apt-get update && apt-get install -y     xvfb     ffmpeg     chromium-browser     pulseaudio     curl     supervisor     && rm -rf /var/lib/apt/lists/*
+#8 CANCELED
+target snake-app: failed to solve: failed to read dockerfile: open Dockerfile: no such file or directory
+Error ❌ time="2025-09-24T10:46:37Z" level=warning msg="/etc/dokploy/compose/pump-streamer-strjiw/code/docker-compose.streaming.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+target snake-app: failed to solve: failed to read dockerfile: open Dockerfile: no such file or directory
