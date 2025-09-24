@@ -1,4 +1,38 @@
 services:
+  # PostgreSQL database
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-snakedb}
+      - POSTGRES_USER=${POSTGRES_USER:-snake_user}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-secure_snake_prod_password_2024}
+      # Use secure scram-sha-256 auth (PostgreSQL 15 default)
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    # No external port exposure for security - only accessible within Docker network
+    networks:
+      - snake-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-snake_user} -d ${POSTGRES_DB:-snakedb}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # Database migration service (runs once)
+  db-migrate:
+    build: .
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-snake_user}:${POSTGRES_PASSWORD:-secure_snake_prod_password_2024}@postgres:5432/${POSTGRES_DB:-snakedb}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: ["npm", "run", "db:push", "--force"]
+    networks:
+      - snake-network
+    restart: "no"  # Run only once
+
   # Your existing Snake game app
   snake-app:
     build: .
@@ -6,9 +40,14 @@ services:
       - "5000:5000"
     environment:
       - NODE_ENV=production
-      - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-snake_user}:${POSTGRES_PASSWORD:-secure_snake_prod_password_2024}@postgres:5432/${POSTGRES_DB:-snakedb}
       - REPLIT_KEEP_PACKAGE_DEV_DEPENDENCIES=1
       - REPLIT_DISABLE_PACKAGE_LAYER=1
+    depends_on:
+      postgres:
+        condition: service_healthy
+      db-migrate:
+        condition: service_completed_successfully
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/api/stats"]
       interval: 30s
@@ -24,17 +63,25 @@ services:
       context: .
       dockerfile: Dockerfile.streamer
     depends_on:
-      - snake-app
+      snake-app:
+        condition: service_healthy
     environment:
       - RTMP_URL=${RTMP_URL}
       - SNAKE_GAME_URL=http://snake-app:5000
       - DISPLAY=:1
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-    privileged: true
+    # Remove privileged mode for security - use specific capabilities if needed
+    cap_add:
+      - SYS_ADMIN  # Only if required for X11/display access
     restart: unless-stopped
     networks:
       - snake-network
+    user: "root"  # Required for X11 access, consider non-root alternatives
+
+volumes:
+  postgres_data:
+    driver: local
 
 networks:
   snake-network:
