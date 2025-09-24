@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { WebSocketServer, WebSocket } from "ws";
 import { storage } from "./storage";
-import { insertGameSchema, insertCommentSchema, insertHighScoreSchema } from "@shared/schema";
+import { insertGameSchema, insertCommentSchema, insertHighScoreSchema } from "../shared/schema.js";
 import { z } from "zod";
 import axios from "axios";
 

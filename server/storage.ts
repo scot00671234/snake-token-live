@@ -1,4 +1,4 @@
-import { games, comments, highScores, gameStats, type Game, type InsertGame, type Comment, type InsertComment, type HighScore, type InsertHighScore, type GameStats } from "@shared/schema";
+import { games, comments, highScores, gameStats, type Game, type InsertGame, type Comment, type InsertComment, type HighScore, type InsertHighScore, type GameStats } from "../shared/schema.js";
 import { db } from "./db";
 import { eq, desc, and, sql } from "drizzle-orm";
 
