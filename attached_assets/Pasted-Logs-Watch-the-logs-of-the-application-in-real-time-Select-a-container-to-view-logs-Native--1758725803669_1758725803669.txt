@@ -1,0 +1,108 @@
+Logs
+Watch the logs of the application in real time
+
+Select a container to view logs
+Native
+
+
+snake-token-live-snakegameapp-w9ezik.1.mpawuhzf299essropnsysjqcn (6235e32ca856) 
+Search logs...
+at /app/node_modules/pg-pool/index.js:45:11
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+at async file:///app/node_modules/drizzle-orm/node-postgres/session.js:83:22
+at async DatabaseStorage.getActiveGame (file:///app/dist/index.js:129:20)
+at async file:///app/dist/index.js:423:26 {
+length: 105,
+severity: 'ERROR',
+code: '42P01',
+detail: undefined,
+hint: undefined,
+position: '109',
+internalPosition: undefined,
+internalQuery: undefined,
+where: undefined,
+schema: undefined,
+table: undefined,
+column: undefined,
+dataType: undefined,
+constraint: undefined,
+file: 'parse_relation.c',
+line: '1392',
+routine: 'parserOpenTable'
+}
+2:55:37 PM [express] GET /api/game/current 500 in 13ms :: {"error":"Failed to fetch current game"}
+Error fetching current game: error: relation "games" does not exist
+at /app/node_modules/pg-pool/index.js:45:11
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+at async file:///app/node_modules/drizzle-orm/node-postgres/session.js:83:22
+at async DatabaseStorage.getActiveGame (file:///app/dist/index.js:129:20)
+at async file:///app/dist/index.js:423:26 {
+length: 105,
+severity: 'ERROR',
+code: '42P01',
+detail: undefined,
+hint: undefined,
+position: '109',
+internalPosition: undefined,
+internalQuery: undefined,
+where: undefined,
+schema: undefined,
+table: undefined,
+column: undefined,
+dataType: undefined,
+constraint: undefined,
+file: 'parse_relation.c',
+line: '1392',
+routine: 'parserOpenTable'
+}
+2:55:38 PM [express] GET /api/game/current 500 in 11ms :: {"error":"Failed to fetch current game"}
+Error fetching stats: error: relation "game_stats" does not exist
+at /app/node_modules/pg-pool/index.js:45:11
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+at async file:///app/node_modules/drizzle-orm/node-postgres/session.js:83:22
+at async DatabaseStorage.getGameStats (file:///app/dist/index.js:153:21)
+at async file:///app/dist/index.js:409:21 {
+length: 110,
+severity: 'ERROR',
+code: '42P01',
+detail: undefined,
+hint: undefined,
+position: '100',
+internalPosition: undefined,
+internalQuery: undefined,
+where: undefined,
+schema: undefined,
+table: undefined,
+column: undefined,
+dataType: undefined,
+constraint: undefined,
+file: 'parse_relation.c',
+line: '1392',
+routine: 'parserOpenTable'
+}
+2:55:39 PM [express] GET /api/stats 500 in 16ms :: {"error":"Failed to fetch stats"}
+Error fetching current game: error: relation "games" does not exist
+at /app/node_modules/pg-pool/index.js:45:11
+at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+at async file:///app/node_modules/drizzle-orm/node-postgres/session.js:83:22
+at async DatabaseStorage.getActiveGame (file:///app/dist/index.js:129:20)
+at async file:///app/dist/index.js:423:26 {
+length: 105,
+severity: 'ERROR',
+code: '42P01',
+detail: undefined,
+hint: undefined,
+position: '109',
+internalPosition: undefined,
+internalQuery: undefined,
+where: undefined,
+schema: undefined,
+table: undefined,
+column: undefined,
+dataType: undefined,
+constraint: undefined,
+file: 'parse_relation.c',
+line: '1392',
+routine: 'parserOpenTable'
+}
+2:55:39 PM [express] GET /api/game/current 500 in 17ms :: {"error":"Failed to fetch current game"}
