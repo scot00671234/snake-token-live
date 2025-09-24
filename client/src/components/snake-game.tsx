@@ -78,23 +78,24 @@ export default function SnakeGame({ gameData }: SnakeGameProps) {
   };
 
   return (
-    <div className="cyber-border rounded-lg overflow-hidden">
+    <div className="cyber-border rounded-lg overflow-hidden" style={{width: '720px', height: '480px'}}>
       <div className="relative">
         <canvas
           ref={canvasRef}
-          width={800}
-          height={600}
-          className="game-canvas w-full bg-card"
+          width={720}
+          height={480}
+          className="game-canvas bg-card"
+          style={{width: '720px', height: '480px'}}
           data-testid="game-canvas"
         />
         
         {!isGameRunning && (
           <div className="absolute inset-0 bg-card/80 backdrop-blur-sm flex items-center justify-center">
             <div className="text-center space-y-4">
-              <h2 className="text-2xl font-cyber font-bold text-primary neon-text">
+              <h2 className="text-xl font-cyber font-bold text-primary neon-text">
                 SNAKE GAME
               </h2>
-              <p className="text-muted-foreground">
+              <p className="text-sm text-muted-foreground">
                 Comment commands control the snake!
               </p>
               <button

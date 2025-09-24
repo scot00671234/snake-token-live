@@ -19,56 +19,68 @@ export default function Game() {
 
 
   return (
-    <div className="bg-background text-foreground font-sans min-h-screen">
-      {/* Header */}
-      <header className="border-b border-border bg-card/50 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-3">
+    <div className="bg-background text-foreground font-sans h-screen flex flex-col overflow-hidden">
+      {/* Compact Header for Livestreaming */}
+      <header className="border-b border-border bg-card/50 flex-shrink-0">
+        <div className="container mx-auto px-4 py-2">
           <div className="flex items-center justify-center">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                <span className="text-primary-foreground font-bold font-cyber">S</span>
+              <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                <span className="text-primary-foreground font-bold font-cyber text-sm">S</span>
               </div>
-              <h1 className="text-xl font-cyber font-bold neon-text">TWITCH PLAYS SNAKE</h1>
+              <h1 className="text-lg font-cyber font-bold neon-text">pump.fun PLAYS SNAKE</h1>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Main Game Container - Single Column Layout */}
-      <main className="container mx-auto px-4 py-4 space-y-4 max-w-6xl">
-        {/* Game Stats */}
-        <GameStats stats={stats as any} gameData={gameData as any} />
+      {/* Perfect Fit Layout for 1920x1080 - Zero Scrolling */}
+      <main className="flex-1 flex flex-col px-4 py-2 min-h-0 overflow-hidden">
+        {/* Compact Stats Row */}
+        <div className="flex-shrink-0 mb-1">
+          <GameStats stats={stats as any} gameData={gameData as any} />
+        </div>
         
-        {/* Game Canvas */}
-        <SnakeGame gameData={gameData} />
-
-        {/* Game Rules - Always Visible */}
-        <div className="data-panel p-4 rounded-lg border border-border">
-          <h3 className="text-lg font-cyber font-bold mb-3 text-primary">How to Play</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <h4 className="font-semibold text-secondary">Comment Commands:</h4>
-              <div className="space-y-1 text-sm text-muted-foreground">
-                <div><span className="font-mono bg-muted px-2 py-1 rounded">up</span> - Move snake up</div>
-                <div><span className="font-mono bg-muted px-2 py-1 rounded">down</span> - Move snake down</div>
-                <div><span className="font-mono bg-muted px-2 py-1 rounded">left</span> - Move snake left</div>
-                <div><span className="font-mono bg-muted px-2 py-1 rounded">right</span> - Move snake right</div>
+        {/* Main Content Area - Game + Rules + Comments */}
+        <div className="flex-1 flex gap-3 min-h-0">
+          {/* Left Side - Game Canvas (Fixed Size for Perfect Fit) */}
+          <div className="flex flex-col items-center justify-center" style={{width: '760px'}}>
+            <SnakeGame gameData={gameData} />
+          </div>
+          
+          {/* Right Side - Rules + Comments */}
+          <div className="flex-1 flex flex-col gap-2 min-h-0">
+            {/* Compact Rules - Always Visible */}
+            <div className="data-panel p-3 rounded-lg border border-border flex-shrink-0">
+              <h3 className="text-sm font-cyber font-bold mb-2 text-primary">How to Play</h3>
+              <div className="space-y-2 text-xs">
+                <div>
+                  <h4 className="font-semibold text-secondary mb-1">Commands:</h4>
+                  <div className="flex flex-wrap gap-1">
+                    <span className="font-mono bg-muted px-1 py-0.5 rounded text-xs">up</span>
+                    <span className="font-mono bg-muted px-1 py-0.5 rounded text-xs">down</span>
+                    <span className="font-mono bg-muted px-1 py-0.5 rounded text-xs">left</span>
+                    <span className="font-mono bg-muted px-1 py-0.5 rounded text-xs">right</span>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-accent mb-1">Rules:</h4>
+                  <div className="text-xs text-muted-foreground space-y-0.5">
+                    <div>• Snake moves automatically</div>
+                    <div>• Eat food to grow and score</div>
+                    <div>• Avoid walls and tail</div>
+                    <div>• Comments control direction</div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="space-y-2">
-              <h4 className="font-semibold text-accent">Game Rules:</h4>
-              <div className="text-sm text-muted-foreground space-y-1">
-                <div>• Snake moves automatically every 200ms</div>
-                <div>• Collect food to grow and increase score</div>
-                <div>• Avoid walls and your own tail</div>
-                <div>• Comments control the next move</div>
-              </div>
+            
+            {/* Compact Comments Feed */}
+            <div className="flex-1 min-h-0">
+              <CommentsFeed gameId={(gameData as any)?.game?.id} />
             </div>
           </div>
         </div>
-
-        {/* Comments Feed */}
-        <CommentsFeed gameId={(gameData as any)?.game?.id} />
       </main>
     </div>
   );

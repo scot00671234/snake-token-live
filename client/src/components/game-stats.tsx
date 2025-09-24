@@ -21,28 +21,28 @@ export default function GameStats({ stats, gameData }: GameStatsProps) {
   const activePlayers = gameData?.connectedPlayers || stats?.activePlayers || 0;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div className="data-panel p-4 rounded-lg border border-border">
-        <div className="text-sm text-muted-foreground">Score</div>
-        <div className="text-2xl font-mono font-bold text-primary" data-testid="text-score">
+    <div className="grid grid-cols-4 gap-3">
+      <div className="data-panel p-3 rounded-lg border border-border">
+        <div className="text-xs text-muted-foreground">Score</div>
+        <div className="text-lg font-mono font-bold text-primary" data-testid="text-score">
           {score.toLocaleString()}
         </div>
       </div>
-      <div className="data-panel p-4 rounded-lg border border-border">
-        <div className="text-sm text-muted-foreground">Level</div>
-        <div className="text-2xl font-mono font-bold text-secondary" data-testid="text-level">
+      <div className="data-panel p-3 rounded-lg border border-border">
+        <div className="text-xs text-muted-foreground">Level</div>
+        <div className="text-lg font-mono font-bold text-secondary" data-testid="text-level">
           {level}
         </div>
       </div>
-      <div className="data-panel p-4 rounded-lg border border-border">
-        <div className="text-sm text-muted-foreground">Comments</div>
-        <div className="text-2xl font-mono font-bold text-accent" data-testid="text-comments">
+      <div className="data-panel p-3 rounded-lg border border-border">
+        <div className="text-xs text-muted-foreground">Comments</div>
+        <div className="text-lg font-mono font-bold text-accent" data-testid="text-comments">
           {totalComments.toLocaleString()}
         </div>
       </div>
-      <div className="data-panel p-4 rounded-lg border border-border">
-        <div className="text-sm text-muted-foreground">Players</div>
-        <div className="text-2xl font-mono font-bold text-primary" data-testid="text-players">
+      <div className="data-panel p-3 rounded-lg border border-border">
+        <div className="text-xs text-muted-foreground">Players</div>
+        <div className="text-lg font-mono font-bold text-primary" data-testid="text-players">
           {activePlayers}
         </div>
       </div>
