@@ -1,0 +1,111 @@
+Deployment
+See all the details of this deployment | 
+
+Initializing deployment
+Clonning Repo github.com/scot00671234/snake-token-live.git to /etc/dokploy/compose/pump-streamer-strjiw/code: ✅
+Cloning into '/etc/dokploy/compose/pump-streamer-strjiw/code'...
+remote: Enumerating objects: 146, done.
+Cloned github.com/scot00671234/snake-token-live.git: ✅
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║ App Name: pump-streamer-strjiw                                               ║
+║ Build Compose 🐳                                                             ║
+║ Detected: 0 mounts 📂                                                        ║
+║ Command: docker compose -p pump-streamer-strjiw -f                           ║
+║ ./docker-compose.streaming.yml up -d --build --remove-orphans                ║
+║ Source Type: docker github ✅                                                ║
+║ Compose Type: docker-compose ✅                                              ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+time="2025-09-24T10:53:33Z" level=warning msg="/etc/dokploy/compose/pump-streamer-strjiw/code/docker-compose.streaming.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.10kB done
+#1 DONE 0.0s
+#2 [snake-app internal] load build definition from Dockerfile
+#2 transferring dockerfile: 453B 0.0s done
+#2 DONE 0.0s
+#3 [pump-streamer internal] load build definition from Dockerfile.streamer
+#3 transferring dockerfile: 945B 0.0s done
+#3 DONE 0.0s
+#4 [pump-streamer internal] load metadata for docker.io/library/ubuntu:22.04
+#4 DONE 0.0s
+#5 [pump-streamer internal] load .dockerignore
+#5 transferring context: 2B 0.0s done
+#5 DONE 0.0s
+#6 [pump-streamer 1/8] FROM docker.io/library/ubuntu:22.04
+#6 CACHED
+#7 [pump-streamer internal] load build context
+#7 transferring context: 3.22kB 0.0s done
+#7 DONE 0.1s
+#8 [pump-streamer 2/8] RUN apt-get update && apt-get install -y     xvfb     ffmpeg     chromium-browser     pulseaudio     curl     supervisor     && rm -rf /var/lib/apt/lists/*
+#8 0.445 Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+#8 0.583 Get:2 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB]
+#8 ...
+#5 [snake-app internal] load .dockerignore
+#5 transferring context: 2B 0.0s done
+#5 DONE 0.0s
+#9 [snake-app internal] load metadata for docker.io/library/node:20-slim
+#9 DONE 0.7s
+#10 [snake-app 1/6] FROM docker.io/library/node:20-slim@sha256:d38efce970505168e50665d2350ae7d102204235d7072a1076afbdf227c1ea17
+#10 DONE 0.0s
+#8 [pump-streamer 2/8] RUN apt-get update && apt-get install -y     xvfb     ffmpeg     chromium-browser     pulseaudio     curl     supervisor     && rm -rf /var/lib/apt/lists/*
+#8 0.829 Get:3 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [5526 kB]
+#8 1.044 Get:4 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [3336 kB]
+#8 1.072 Get:5 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+#8 ...
+#11 [snake-app internal] load build context
+#11 transferring context: 7.41MB 0.4s done
+#11 DONE 0.4s
+#12 [snake-app 3/6] COPY package*.json ./
+#12 CACHED
+#13 [snake-app 2/6] WORKDIR /app
+#13 CACHED
+#14 [snake-app 4/6] RUN npm ci --only=production
+#14 CACHED
+#8 [pump-streamer 2/8] RUN apt-get update && apt-get install -y     xvfb     ffmpeg     chromium-browser     pulseaudio     curl     supervisor     && rm -rf /var/lib/apt/lists/*
+#8 1.203 Get:6 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+#8 ...
+#15 [snake-app 5/6] COPY . .
+#15 DONE 0.2s
+#8 [pump-streamer 2/8] RUN apt-get update && apt-get install -y     xvfb     ffmpeg     chromium-browser     pulseaudio     curl     supervisor     && rm -rf /var/lib/apt/lists/*
+#8 1.213 Get:7 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [1274 kB]
+#8 1.279 Get:8 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [71.0 kB]
+#8 1.966 Get:9 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [266 kB]
+#8 2.114 Get:10 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [17.5 MB]
+#8 ...
+#16 [snake-app 6/6] RUN npm run build
+#16 0.871
+#16 0.871 > rest-express@1.0.0 build
+#16 0.871 > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+#16 0.871
+#16 0.878 sh: 1: vite: not found
+#16 ERROR: process "/bin/sh -c npm run build" did not complete successfully: exit code: 127
+#8 [pump-streamer 2/8] RUN apt-get update && apt-get install -y     xvfb     ffmpeg     chromium-browser     pulseaudio     curl     supervisor     && rm -rf /var/lib/apt/lists/*
+#8 CANCELED
+------
+> [snake-app 6/6] RUN npm run build:
+0.871
+0.871 > rest-express@1.0.0 build
+0.871 > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+0.871
+0.878 sh: 1: vite: not found
+------
+Dockerfile:18
+--------------------
+|
+|     # Build the application
+| >>> RUN npm run build
+|
+|     # Expose port 5000
+--------------------
+target snake-app: failed to solve: process "/bin/sh -c npm run build" did not complete successfully: exit code: 127
+Error ❌ time="2025-09-24T10:53:33Z" level=warning msg="/etc/dokploy/compose/pump-streamer-strjiw/code/docker-compose.streaming.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+Dockerfile:18
+--------------------
+|
+|     # Build the application
+| >>> RUN npm run build
+|
+|     # Expose port 5000
+--------------------
+target snake-app: failed to solve: process "/bin/sh -c npm run build" did not complete successfully: exit code: 127
