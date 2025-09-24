@@ -1,0 +1,157 @@
+
+Deployment
+See all the details of this deployment | 
+
+Initializing deployment
+Clonning Repo github.com/scot00671234/snake-token-live.git to /etc/dokploy/compose/pump-streamer-strjiw/code: ✅
+Cloning into '/etc/dokploy/compose/pump-streamer-strjiw/code'...
+remote: Enumerating objects: 153, done.
+Cloned github.com/scot00671234/snake-token-live.git: ✅
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║ App Name: pump-streamer-strjiw                                               ║
+║ Build Compose 🐳                                                             ║
+║ Detected: 0 mounts 📂                                                        ║
+║ Command: docker compose -p pump-streamer-strjiw -f                           ║
+║ ./docker-compose.streaming.yml up -d --build --remove-orphans                ║
+║ Source Type: docker github ✅                                                ║
+║ Compose Type: docker-compose ✅                                              ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.60kB done
+#1 DONE 0.0s
+#2 [db-migrate internal] load build definition from Dockerfile
+#2 transferring dockerfile: 478B done
+#2 transferring dockerfile: 478B done
+#2 DONE 0.0s
+#3 [pump-streamer internal] load build definition from Dockerfile.streamer
+#3 transferring dockerfile: 945B done
+#3 DONE 0.0s
+#4 [pump-streamer internal] load metadata for docker.io/library/ubuntu:22.04
+#4 DONE 0.0s
+#5 [pump-streamer internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+#6 [pump-streamer 1/8] FROM docker.io/library/ubuntu:22.04
+#6 DONE 0.0s
+#7 [pump-streamer internal] load build context
+#7 transferring context: 3.22kB 0.0s done
+#7 DONE 0.0s
+#8 [pump-streamer 3/8] RUN mkdir -p /var/log/supervisor
+#8 CACHED
+#9 [pump-streamer 5/8] COPY scripts/monitor-stream.sh /usr/local/bin/monitor-stream.sh
+#9 CACHED
+#10 [pump-streamer 4/8] COPY scripts/stream-setup.sh /usr/local/bin/stream-setup.sh
+#10 CACHED
+#11 [pump-streamer 7/8] RUN chmod +x /usr/local/bin/stream-setup.sh
+#11 CACHED
+#12 [pump-streamer 6/8] COPY scripts/supervisor.conf /etc/supervisor/conf.d/streaming.conf
+#12 CACHED
+#13 [pump-streamer 2/8] RUN apt-get update && apt-get install -y     xvfb     ffmpeg     chromium-browser     pulseaudio     curl     supervisor     && rm -rf /var/lib/apt/lists/*
+#13 CACHED
+#14 [pump-streamer 8/8] RUN chmod +x /usr/local/bin/monitor-stream.sh
+#14 CACHED
+#15 [pump-streamer] exporting to image
+#15 exporting layers done
+#15 writing image sha256:88f0ae6498563eefcc5f82d91ca8cf398b7de5ae8785fbaf4f6388b223768525 done
+#15 naming to docker.io/library/pump-streamer-strjiw-pump-streamer done
+#15 DONE 0.0s
+#16 [pump-streamer] resolving provenance for metadata file
+#16 DONE 0.0s
+#17 [snake-app internal] load metadata for docker.io/library/node:20-slim
+#17 DONE 0.3s
+#5 [db-migrate internal] load .dockerignore
+#5 CACHED
+#18 [db-migrate 1/6] FROM docker.io/library/node:20-slim@sha256:d38efce970505168e50665d2350ae7d102204235d7072a1076afbdf227c1ea17
+#18 DONE 0.0s
+#19 [db-migrate internal] load build context
+#19 transferring context: 9.07MB 0.2s done
+#19 DONE 0.2s
+#20 [db-migrate 2/6] WORKDIR /app
+#20 CACHED
+#21 [db-migrate 3/6] COPY package*.json ./
+#21 CACHED
+#22 [db-migrate 4/6] RUN npm ci
+#22 CACHED
+#23 [db-migrate 5/6] COPY . .
+#23 DONE 0.1s
+#24 [snake-app 6/6] RUN npm run build
+#24 0.257
+#24 0.257 > rest-express@1.0.0 build
+#24 0.257 > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+#24 0.257
+#24 0.690 vite v5.4.20 building for production...
+#24 0.742 transforming...
+#24 1.337 Browserslist: browsers data (caniuse-lite) is 11 months old. Please run:
+#24 1.337   npx update-browserslist-db@latest
+#24 1.337   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+#24 6.932 ✓ 1666 modules transformed.
+#24 7.225 rendering chunks...
+#24 7.233 computing gzip size...
+#24 7.244 ../dist/public/index.html                   1.95 kB │ gzip:  0.74 kB
+#24 7.245 ../dist/public/assets/index-CxUJM4_A.css   60.73 kB │ gzip: 10.82 kB
+#24 7.246 ../dist/public/assets/index-CvMMrQHg.js   283.53 kB │ gzip: 91.32 kB
+#24 7.246 ✓ built in 6.53s
+#24 7.295
+#24 7.295   dist/index.js  25.4kb
+#24 7.295
+#24 7.295 ⚡ Done in 7ms
+#24 DONE 7.3s
+#25 [db-migrate] exporting to image
+#25 exporting layers 0.1s done
+#25 writing image sha256:a2c4c4ed975028ba09a0c13171851a161f1e38a8cc45e316e4f0f035aac9726e done
+#25 naming to docker.io/library/pump-streamer-strjiw-db-migrate
+#25 naming to docker.io/library/pump-streamer-strjiw-db-migrate done
+#25 DONE 0.1s
+#26 [snake-app] exporting to image
+#26 exporting layers 0.1s done
+#26 writing image sha256:d36822dce0e3d01182846ab55ce61333f2e5e30532c0e9b409d65c660e402b99 done
+#26 naming to docker.io/library/pump-streamer-strjiw-snake-app done
+#26 DONE 0.1s
+#27 [snake-app] resolving provenance for metadata file
+#27 DONE 0.0s
+#28 [db-migrate] resolving provenance for metadata file
+#28 DONE 0.0s
+pump-streamer-strjiw-db-migrate  Built
+pump-streamer-strjiw-snake-app  Built
+pump-streamer-strjiw-pump-streamer  Built
+Container pump-streamer-strjiw-postgres-1  Running
+Container pump-streamer-strjiw-db-migrate-1  Recreate
+Container pump-streamer-strjiw-db-migrate-1  Recreated
+Container pump-streamer-strjiw-snake-app-1  Recreate
+Container pump-streamer-strjiw-snake-app-1  Recreated
+Container pump-streamer-strjiw-postgres-1  Waiting
+Container pump-streamer-strjiw-postgres-1  Healthy
+Container pump-streamer-strjiw-db-migrate-1  Starting
+Container pump-streamer-strjiw-db-migrate-1  Started
+Container pump-streamer-strjiw-postgres-1  Waiting
+Container pump-streamer-strjiw-db-migrate-1  Waiting
+Container pump-streamer-strjiw-postgres-1  Healthy
+Container pump-streamer-strjiw-db-migrate-1  Exited
+Container pump-streamer-strjiw-snake-app-1  Starting
+Container pump-streamer-strjiw-snake-app-1  Started
+Container pump-streamer-strjiw-snake-app-1  Waiting
+Container pump-streamer-strjiw-snake-app-1  Error
+dependency failed to start: container pump-streamer-strjiw-snake-app-1 is unhealthy
+Error ❌  pump-streamer-strjiw-db-migrate  Built
+pump-streamer-strjiw-snake-app  Built
+pump-streamer-strjiw-pump-streamer  Built
+Container pump-streamer-strjiw-postgres-1  Running
+Container pump-streamer-strjiw-db-migrate-1  Recreate
+Container pump-streamer-strjiw-db-migrate-1  Recreated
+Container pump-streamer-strjiw-snake-app-1  Recreate
+Container pump-streamer-strjiw-snake-app-1  Recreated
+Container pump-streamer-strjiw-postgres-1  Waiting
+Container pump-streamer-strjiw-postgres-1  Healthy
+Container pump-streamer-strjiw-db-migrate-1  Starting
+Container pump-streamer-strjiw-db-migrate-1  Started
+Container pump-streamer-strjiw-postgres-1  Waiting
+Container pump-streamer-strjiw-db-migrate-1  Waiting
+Container pump-streamer-strjiw-postgres-1  Healthy
+Container pump-streamer-strjiw-db-migrate-1  Exited
+Container pump-streamer-strjiw-snake-app-1  Starting
+Container pump-streamer-strjiw-snake-app-1  Started
+Container pump-streamer-strjiw-snake-app-1  Waiting
+Container pump-streamer-strjiw-snake-app-1  Error
+dependency failed to start: container pump-streamer-strjiw-snake-app-1 is unhealthy
