@@ -1,0 +1,107 @@
+Logs
+Watch the logs of the application in real time
+
+Select a container to view logs
+Native
+
+
+snake-token-live-snakegamedatabase-uar5qk.1.m08vzsnopryp8sjziz04b4vk7 (74ee695ec190) 
+Search logs...
+2025-09-24 14:47:59.813 UTC [1] LOG:  starting PostgreSQL 15.14 (Debian 15.14-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+2025-09-24 14:47:59.814 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2025-09-24 14:47:59.814 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2025-09-24 14:47:59.817 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2025-09-24 14:47:59.827 UTC [27] LOG:  database system was shut down at 2025-09-24 14:46:56 UTC
+2025-09-24 14:47:59.843 UTC [1] LOG:  database system is ready to accept connections
+2025-09-24 14:52:59.920 UTC [25] LOG:  checkpoint starting: time
+2025-09-24 14:52:59.927 UTC [25] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.001 s, total=0.008 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2025-09-24 14:54:10.062 UTC [49] ERROR:  relation "game_stats" does not exist at character 100
+2025-09-24 14:54:10.062 UTC [49] STATEMENT:  select "id", "total_games", "total_comments", "active_players", "average_score", "updated_at" from "game_stats" order by "game_stats"."updated_at" desc limit $1
+2025-09-24 14:54:10.063 UTC [50] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:54:10.063 UTC [50] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:54:11.417 UTC [51] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:54:11.417 UTC [51] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:54:12.500 UTC [52] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:54:12.500 UTC [52] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:54:13.732 UTC [53] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:54:13.732 UTC [53] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:54:14.854 UTC [54] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:54:14.854 UTC [54] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:54:15.449 UTC [55] ERROR:  relation "game_stats" does not exist at character 100
+2025-09-24 14:54:15.449 UTC [55] STATEMENT:  select "id", "total_games", "total_comments", "active_players", "average_score", "updated_at" from "game_stats" order by "game_stats"."updated_at" desc limit $1
+2025-09-24 14:54:15.945 UTC [56] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:54:15.945 UTC [56] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:54:17.046 UTC [57] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:54:17.046 UTC [57] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:54:18.140 UTC [58] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:54:18.140 UTC [58] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:54:19.251 UTC [59] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:54:19.251 UTC [59] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:54:20.358 UTC [61] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:54:20.358 UTC [61] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:54:20.545 UTC [62] ERROR:  relation "game_stats" does not exist at character 100
+2025-09-24 14:54:20.545 UTC [62] STATEMENT:  select "id", "total_games", "total_comments", "active_players", "average_score", "updated_at" from "game_stats" order by "game_stats"."updated_at" desc limit $1
+2025-09-24 14:54:21.516 UTC [63] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:54:21.516 UTC [63] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:54:22.641 UTC [64] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:54:22.641 UTC [64] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:06.729 UTC [67] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:06.729 UTC [67] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:07.824 UTC [68] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:07.824 UTC [68] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:08.935 UTC [69] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:08.935 UTC [69] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:10.034 UTC [70] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:10.034 UTC [70] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:10.658 UTC [71] ERROR:  relation "game_stats" does not exist at character 100
+2025-09-24 14:55:10.658 UTC [71] STATEMENT:  select "id", "total_games", "total_comments", "active_players", "average_score", "updated_at" from "game_stats" order by "game_stats"."updated_at" desc limit $1
+2025-09-24 14:55:11.168 UTC [72] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:11.168 UTC [72] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:12.265 UTC [73] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:12.265 UTC [73] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:13.364 UTC [74] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:13.364 UTC [74] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:16.130 UTC [75] ERROR:  relation "game_stats" does not exist at character 100
+2025-09-24 14:55:16.130 UTC [75] STATEMENT:  select "id", "total_games", "total_comments", "active_players", "average_score", "updated_at" from "game_stats" order by "game_stats"."updated_at" desc limit $1
+2025-09-24 14:55:16.479 UTC [76] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:16.479 UTC [76] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:17.571 UTC [77] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:17.571 UTC [77] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:18.992 UTC [78] ERROR:  relation "game_stats" does not exist at character 100
+2025-09-24 14:55:18.992 UTC [78] STATEMENT:  select "id", "total_games", "total_comments", "active_players", "average_score", "updated_at" from "game_stats" order by "game_stats"."updated_at" desc limit $1
+2025-09-24 14:55:19.000 UTC [79] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:19.000 UTC [79] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:20.158 UTC [81] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:20.158 UTC [81] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:21.253 UTC [82] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:21.253 UTC [82] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:22.343 UTC [83] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:22.343 UTC [83] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:23.437 UTC [84] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:23.437 UTC [84] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:24.140 UTC [85] ERROR:  relation "game_stats" does not exist at character 100
+2025-09-24 14:55:24.140 UTC [85] STATEMENT:  select "id", "total_games", "total_comments", "active_players", "average_score", "updated_at" from "game_stats" order by "game_stats"."updated_at" desc limit $1
+2025-09-24 14:55:24.534 UTC [86] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:24.534 UTC [86] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:25.624 UTC [87] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:25.624 UTC [87] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:26.732 UTC [88] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:26.732 UTC [88] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:27.835 UTC [89] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:27.835 UTC [89] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:28.944 UTC [90] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:28.944 UTC [90] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:29.231 UTC [91] ERROR:  relation "game_stats" does not exist at character 100
+2025-09-24 14:55:29.231 UTC [91] STATEMENT:  select "id", "total_games", "total_comments", "active_players", "average_score", "updated_at" from "game_stats" order by "game_stats"."updated_at" desc limit $1
+2025-09-24 14:55:36.063 UTC [92] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:36.063 UTC [92] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:37.155 UTC [93] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:37.155 UTC [93] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:38.239 UTC [94] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:38.239 UTC [94] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 14:55:39.396 UTC [95] ERROR:  relation "game_stats" does not exist at character 100
+2025-09-24 14:55:39.396 UTC [95] STATEMENT:  select "id", "total_games", "total_comments", "active_players", "average_score", "updated_at" from "game_stats" order by "game_stats"."updated_at" desc limit $1
+2025-09-24 14:55:39.400 UTC [96] ERROR:  relation "games" does not exist at character 109
+2025-09-24 14:55:39.400 UTC [96] STATEMENT:  select "id", "score", "level", "duration", "moves", "is_active", "game_data", "created_at", "ended_at" from "games" where "games"."is_active" = $1 order by "games"."created_at" desc limit $2
+2025-09-24 15:18:00.418 UTC [25] LOG:  checkpoint starting: time
+2025-09-24 15:18:07.145 UTC [25] LOG:  checkpoint complete: wrote 68 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=6.720 s, sync=0.004 s, total=6.728 s; sync files=60, longest=0.001 s, average=0.001 s; distance=280 kB, estimate=280 kB
