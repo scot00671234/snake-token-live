@@ -128,29 +128,36 @@ export default function CommentsFeed({ gameId }: CommentsFeedProps) {
         </div>
       </div>
 
-      {/* Compact Recent Commands */}
-      <div className="data-panel p-2 rounded-lg border border-border flex-shrink-0">
-        <h3 className="text-xs font-cyber font-bold mb-1 text-accent">Last Commands</h3>
-        <div className="space-y-1" data-testid="last-commands">
-          {lastCommands.slice(0, 2).map((command, index) => {
-            const colorClasses = getUserColorClasses(command.user);
-            return (
-              <div key={index} className="flex justify-between items-center text-xs">
-                <span className={`font-mono ${colorClasses.text}`}>
-                  {command.direction}
-                </span>
-                <span className="text-muted-foreground truncate ml-1">{command.user}</span>
-              </div>
-            );
-          })}
-          
-          {lastCommands.length === 0 && (
-            <div className="text-center text-muted-foreground text-xs">
-              No commands yet
-            </div>
-          )}
+      {/* Enhanced Recent Commands */}
+      {lastCommands.length > 0 && (
+        <div className="bg-background/30 backdrop-blur-sm rounded-lg border border-border/50 p-3 flex-shrink-0">
+          <h3 className="text-sm font-bold mb-3 text-accent flex items-center gap-2">
+            <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
+            Recent Commands
+          </h3>
+          <div className="flex gap-2" data-testid="last-commands">
+            {lastCommands.slice(0, 3).map((command, index) => {
+              const colorClasses = getUserColorClasses(command.user);
+              const directionSymbols = {
+                'UP': '↑',
+                'DOWN': '↓', 
+                'LEFT': '←',
+                'RIGHT': '→'
+              };
+              return (
+                <div key={index} className="flex items-center gap-2 bg-background/50 rounded-full px-3 py-1 border border-border/30">
+                  <span className="text-lg">
+                    {directionSymbols[command.direction as keyof typeof directionSymbols] || command.direction}
+                  </span>
+                  <span className={`text-xs font-mono ${colorClasses.text} truncate max-w-16`}>
+                    {command.user}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
