@@ -54,28 +54,7 @@ export default function CommentsFeed({ gameId }: CommentsFeedProps) {
     }
   }, [initialComments]);
 
-  // Simulate comments for demo (remove when real API is connected)
-  useEffect(() => {
-    if (!gameId) {
-      const simulatedComments = [
-        { id: '1', username: 'AlphaTrader', originalText: 'right', command: 'right', isValid: true, createdAt: new Date().toISOString() },
-        { id: '2', username: 'CryptoSnake', originalText: 'up up up! 🚀', command: 'up', isValid: true, createdAt: new Date().toISOString() },
-        { id: '3', username: 'GameMaster', originalText: 'down', command: 'down', isValid: true, createdAt: new Date().toISOString() },
-        { id: '4', username: 'SnakeHolder', originalText: 'This is genius! 🐍 left', command: 'left', isValid: true, createdAt: new Date().toISOString() },
-        { id: '5', username: 'MoonBoi', originalText: 'right! Let\'s go snake army!', command: 'right', isValid: true, createdAt: new Date().toISOString() },
-      ];
-      setComments(simulatedComments);
-      
-      const simulatedCommands = [
-        { direction: 'RIGHT', user: 'AlphaTrader' },
-        { direction: 'UP', user: 'CryptoSnake' },
-        { direction: 'DOWN', user: 'GameMaster' },
-        { direction: 'LEFT', user: 'SnakeHolder' },
-        { direction: 'RIGHT', user: 'MoonBoi' },
-      ];
-      setLastCommands(simulatedCommands);
-    }
-  }, [gameId]);
+  // Only show real data - no mock comments
 
   const getTimeAgo = (timestamp: string) => {
     const now = new Date();
@@ -87,10 +66,14 @@ export default function CommentsFeed({ gameId }: CommentsFeedProps) {
     return `${Math.floor(diffInSeconds / 3600)}h ago`;
   };
 
-  const getUserColor = (username: string) => {
-    const colors = ['primary', 'secondary', 'accent'];
+  const getUserColorClasses = (username: string) => {
+    const colorClasses = [
+      { bg: 'bg-primary', text: 'text-primary' },
+      { bg: 'bg-secondary', text: 'text-secondary' }, 
+      { bg: 'bg-accent', text: 'text-accent' }
+    ];
     const hash = username.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
-    return colors[hash % colors.length];
+    return colorClasses[hash % colorClasses.length];
   };
 
   return (
@@ -104,18 +87,18 @@ export default function CommentsFeed({ gameId }: CommentsFeedProps) {
         
         <div className="flex-1 overflow-y-auto p-4 space-y-3" data-testid="comments-feed">
           {comments.map((comment) => {
-            const userColor = getUserColor(comment.username);
+            const colorClasses = getUserColorClasses(comment.username);
             return (
               <div key={comment.id} className="comment-item p-3 rounded-lg animate-slide-up">
                 <div className="flex items-start space-x-3">
-                  <div className={`w-8 h-8 bg-${userColor} rounded-full flex items-center justify-center`}>
+                  <div className={`w-8 h-8 ${colorClasses.bg} rounded-full flex items-center justify-center`}>
                     <span className="text-xs font-bold text-primary-foreground">
                       {comment.username.charAt(0).toUpperCase()}
                     </span>
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center space-x-2">
-                      <span className={`font-mono text-sm text-${userColor}`}>
+                      <span className={`font-mono text-sm ${colorClasses.text}`}>
                         {comment.username}
                       </span>
                       <span className="text-xs text-muted-foreground">
@@ -153,14 +136,17 @@ export default function CommentsFeed({ gameId }: CommentsFeedProps) {
       <div className="data-panel p-4 rounded-lg border border-border">
         <h3 className="text-lg font-cyber font-bold mb-3 text-accent">Last Commands</h3>
         <div className="space-y-2" data-testid="last-commands">
-          {lastCommands.map((command, index) => (
-            <div key={index} className="flex justify-between items-center text-sm">
-              <span className={`font-mono text-${getUserColor(command.user)}`}>
-                {command.direction}
-              </span>
-              <span className="text-muted-foreground">{command.user}</span>
-            </div>
-          ))}
+          {lastCommands.map((command, index) => {
+            const colorClasses = getUserColorClasses(command.user);
+            return (
+              <div key={index} className="flex justify-between items-center text-sm">
+                <span className={`font-mono ${colorClasses.text}`}>
+                  {command.direction}
+                </span>
+                <span className="text-muted-foreground">{command.user}</span>
+              </div>
+            );
+          })}
           
           {lastCommands.length === 0 && (
             <div className="text-center text-muted-foreground text-sm">

@@ -17,11 +17,11 @@ interface GameStatsProps {
 export default function GameStats({ stats, gameData }: GameStatsProps) {
   const score = gameData?.game?.score || 0;
   const level = gameData?.game?.level || 1;
-  const totalComments = stats?.totalComments || 847;
+  const totalComments = stats?.totalComments || 0;
   const activePlayers = gameData?.connectedPlayers || stats?.activePlayers || 0;
 
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <div className="data-panel p-4 rounded-lg border border-border">
         <div className="text-sm text-muted-foreground">Score</div>
         <div className="text-2xl font-mono font-bold text-primary" data-testid="text-score">
