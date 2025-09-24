@@ -7,6 +7,8 @@ services:
     environment:
       - NODE_ENV=production
       - DATABASE_URL=${DATABASE_URL}
+      - REPLIT_KEEP_PACKAGE_DEV_DEPENDENCIES=1
+      - REPLIT_DISABLE_PACKAGE_LAYER=1
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/api/stats"]
       interval: 30s

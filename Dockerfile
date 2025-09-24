@@ -17,8 +17,8 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Remove dev dependencies after build
-RUN npm prune --omit=dev
+# Clean install production dependencies only
+RUN npm ci --omit=dev
 
 # Expose port 5000
 EXPOSE 5000
