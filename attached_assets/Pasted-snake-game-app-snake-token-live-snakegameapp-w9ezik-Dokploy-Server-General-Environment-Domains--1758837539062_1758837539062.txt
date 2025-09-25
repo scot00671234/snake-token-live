@@ -1,0 +1,67 @@
+snake-game-app
+snake-token-live-snakegameapp-w9ezik
+Dokploy Server
+General
+Environment
+Domains
+Preview Deployments
+Schedules
+Volume Backups
+Deployments
+Logs
+Monitoring
+Advanced
+Logs
+Watch the logs of the application in real time
+
+Select a container to view logs
+Native
+
+
+snake-token-live-snakegameapp-w9ezik.1.kfxuliqb2wg7wi8jy6q166gys (7febed77d9fa) 
+Search logs...
+npm warn config production Use `--omit=dev` instead.
+> rest-express@1.0.0 start
+> NODE_ENV=production node dist/index.js
+8:45:29 PM [express] serving on port 3000
+New game started: PEgGd1TE5K7v0SgzAROqa
+🐍 Snake game auto-started for 24/7 streaming!
+WebSocket client connected
+WebSocket client connected
+WebSocket client disconnected
+WebSocket client disconnected
+WebSocket client connected
+WebSocket client connected
+WebSocket client disconnected
+WebSocket client disconnected
+8:49:04 PM [express] GET /api/stats 200 in 4ms :: {"totalGames":0,"totalComments":0,"activePlayers":…
+8:49:04 PM [express] GET /api/game/current 200 in 2ms :: {"game":{"id":"PEgGd1TE5K7v0SgzAROqa","isAc…
+8:49:04 PM [express] GET /api/comments/75f26313-d723-428f-b56a-73d3581aada8 200 in 8ms
+8:49:04 PM [express] GET /api/comments/PEgGd1TE5K7v0SgzAROqa 200 in 4ms
+WebSocket client connected
+WebSocket client connected
+8:49:05 PM [express] GET /api/game/current 200 in 1ms :: {"game":{"id":"PEgGd1TE5K7v0SgzAROqa","isAc…
+8:49:06 PM [express] GET /api/game/current 304 in 1ms :: {"game":{"id":"PEgGd1TE5K7v0SgzAROqa","isAc…
+8:50:10 PM [express] GET /api/game/current 304 in 1ms :: {"game":{"id":"PEgGd1TE5K7v0SgzAROqa","isAc…
+8:50:10 PM [express] GET /api/stats 200 in 1ms :: {"totalGames":0,"totalComments":0,"activePlayers":…
+8:50:10 PM [express] GET /api/comments/PEgGd1TE5K7v0SgzAROqa 304 in 2ms
+8:50:11 PM [express] GET /api/game/current 304 in 1ms :: {"game":{"id":"PEgGd1TE5K7v0SgzAROqa","isAc…
+8:50:12 PM [express] GET /api/game/current 304 in 2ms :: {"game":{"id":"PEgGd1TE5K7v0SgzAROqa","isAc…
+8:50:13 PM [express] GET /api/game/current 304 in 1ms :: {"game":{"id":"PEgGd1TE5K7v0SgzAROqa","isAc…
+WebSocket client disconnected
+WebSocket client disconnected
+WebSocket client connected
+WebSocket client connected
+WebSocket client disconnected
+WebSocket client disconnected
+WebSocket client connected
+WebSocket client connected
+8:52:55 PM [express] GET /api/game/current 304 in 1ms :: {"game":{"id":"PEgGd1TE5K7v0SgzAROqa","isAc…
+8:52:55 PM [express] GET /api/stats 304 in 2ms :: {"totalGames":0,"totalComments":0,"activePlayers":…
+8:52:55 PM [express] GET /api/comments/PEgGd1TE5K7v0SgzAROqa 304 in 2ms
+8:52:56 PM [express] GET /api/game/current 304 in 6ms :: {"game":{"id":"PEgGd1TE5K7v0SgzAROqa","isAc…
+8:52:57 PM [express] GET /api/game/current 304 in 1ms :: {"game":{"id":"PEgGd1TE5K7v0SgzAROqa","isAc…
+8:53:01 PM [express] GET /api/game/current 304 in 1ms :: {"game":{"id":"PEgGd1TE5K7v0SgzAROqa","isAc…
+8:53:02 PM [express] GET /api/game/current 304 in 1ms :: {"game":{"id":"PEgGd1TE5K7v0SgzAROqa","isAc…
+WebSocket client disconnected
+WebSocket client disconnected

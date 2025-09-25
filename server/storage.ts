@@ -5,6 +5,7 @@ export interface IStorage {
   // Comment methods
   createComment(comment: InsertComment): Promise<Comment>;
   getRecentComments(limit?: number): Promise<Comment[]>;
+  getCommentsByGameId(gameId: string, limit?: number): Promise<Comment[]>;
   
   // Game state methods (in-memory only)
   getCurrentGameState(): GameState | null;
@@ -17,8 +18,10 @@ export class MemoryStorage implements IStorage {
   private readonly maxComments = 100; // Keep last 100 comments
 
   async createComment(insertComment: InsertComment): Promise<Comment> {
+    const currentGame = this.getCurrentGameState();
     const comment: Comment = {
       id: nanoid(),
+      gameId: currentGame?.gameId,
       username: insertComment.username || 'Anonymous',
       originalText: insertComment.originalText,
       command: this.parseCommand(insertComment.originalText),
@@ -38,6 +41,13 @@ export class MemoryStorage implements IStorage {
 
   async getRecentComments(limit: number = 50): Promise<Comment[]> {
     return this.comments
+      .slice(-limit)
+      .reverse(); // Most recent first
+  }
+
+  async getCommentsByGameId(gameId: string, limit: number = 50): Promise<Comment[]> {
+    return this.comments
+      .filter(comment => comment.gameId === gameId)
       .slice(-limit)
       .reverse(); // Most recent first
   }

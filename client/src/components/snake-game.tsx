@@ -27,14 +27,15 @@ export default function SnakeGame({ gameData }: SnakeGameProps) {
       onGameOver: (finalScore: number) => {
         setIsGameRunning(false);
         // Send game end to server
-        fetch('/api/game/end', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            gameId: gameData?.game?.id,
-            finalScore
-          })
+        sendMessage({
+          type: 'gameOver',
+          data: { finalScore }
         });
+        
+        // Auto-restart for 24/7 streaming after 2 seconds
+        setTimeout(() => {
+          startGame();
+        }, 2000);
       },
       onMove: (direction: string) => {
         // Send move to server
@@ -44,6 +45,11 @@ export default function SnakeGame({ gameData }: SnakeGameProps) {
         });
       }
     });
+
+    // Auto-start the game for 24/7 streaming
+    setTimeout(() => {
+      startGame();
+    }, 1000);
 
     return () => {
       if (gameEngineRef.current) {

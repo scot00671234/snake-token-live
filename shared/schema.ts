@@ -15,6 +15,7 @@ export interface GameState {
 // Comment interface for viewer commands (in-memory only)
 export interface Comment {
   id: string;
+  gameId?: string;
   username?: string;
   originalText: string;
   command: string;
@@ -31,9 +32,12 @@ export const insertCommentSchema = z.object({
 // Database table definitions
 export const games = pgTable('games', {
   id: serial('id').primaryKey(),
-  gameId: varchar('game_id', { length: 255 }).notNull().unique(),
   score: integer('score').notNull().default(0),
-  status: varchar('status', { length: 20 }).notNull().default('active'),
+  level: integer('level').notNull().default(1),
+  duration: integer('duration').notNull().default(0),
+  moves: integer('moves').notNull().default(0),
+  isActive: boolean('is_active').notNull().default(true),
+  gameData: text('game_data'),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   endedAt: timestamp('ended_at'),
 });

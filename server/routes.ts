@@ -142,6 +142,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Comments by game ID endpoint (needed for 24/7 streaming)
+  app.get('/api/comments/:gameId', async (req, res) => {
+    try {
+      const gameId = req.params.gameId;
+      const limit = parseInt(req.query.limit as string) || 50;
+      const comments = await storage.getCommentsByGameId(gameId, limit);
+      res.json(comments);
+    } catch (error) {
+      console.error('Error fetching comments for game:', error);
+      res.status(500).json({ error: 'Failed to fetch comments' });
+    }
+  });
+
   // Minimal game state endpoints (for frontend compatibility)
   app.get('/api/game/current', async (req, res) => {
     try {

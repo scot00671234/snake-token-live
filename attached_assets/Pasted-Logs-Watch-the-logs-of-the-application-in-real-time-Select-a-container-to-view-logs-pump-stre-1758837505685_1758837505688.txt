@@ -1,0 +1,105 @@
+Logs
+Watch the logs of the application in real time
+
+Select a container to view logs
+
+pump-streamer-strjiw-pump-streamer-1 (6c25cabb2898) 
+Search logs...
+2025-09-25 21:50:08,360 INFO exited: stream (exit status 1; not expected)
+2025-09-25 21:50:08,768 INFO spawned: 'stream' with pid 3638
+2025-09-25 21:50:09,778 INFO success: stream entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:50:12,304 INFO reaped unknown pid 3646 (exit status 0)
+2025-09-25 21:50:12,305 INFO reaped unknown pid 3645 (exit status 0)
+2025-09-25 21:50:23,346 INFO exited: monitor (exit status 1; not expected)
+2025-09-25 21:50:23,348 INFO spawned: 'monitor' with pid 3650
+2025-09-25 21:50:24,357 INFO success: monitor entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:50:34,381 INFO exited: stream (exit status 1; not expected)
+2025-09-25 21:50:34,381 INFO reaped unknown pid 3613 (exit status 0)
+2025-09-25 21:50:35,384 INFO spawned: 'stream' with pid 3665
+2025-09-25 21:50:36,399 INFO success: stream entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:50:39,416 INFO reaped unknown pid 3679 (exit status 0)
+2025-09-25 21:50:39,416 INFO reaped unknown pid 3678 (exit status 0)
+2025-09-25 21:50:42,405 INFO reaped unknown pid 3686 (exit status 0)
+2025-09-25 21:50:42,405 INFO reaped unknown pid 3685 (exit status 0)
+2025-09-25 21:51:29,663 INFO exited: stream (exit status 1; not expected)
+2025-09-25 21:51:29,665 INFO spawned: 'stream' with pid 3712
+2025-09-25 21:51:30,692 INFO success: stream entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:51:31,548 INFO exited: monitor (exit status 1; not expected)
+2025-09-25 21:51:32,551 INFO spawned: 'monitor' with pid 3717
+2025-09-25 21:51:33,699 INFO success: monitor entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:51:33,700 INFO reaped unknown pid 3723 (exit status 0)
+2025-09-25 21:51:33,700 INFO reaped unknown pid 3722 (exit status 0)
+2025-09-25 21:51:42,717 INFO reaped unknown pid 3668 (exit status 0)
+2025-09-25 21:51:51,597 INFO reaped unknown pid 3741 (exit status 0)
+2025-09-25 21:51:51,597 INFO reaped unknown pid 3740 (exit status 0)
+2025-09-25 21:52:23,839 INFO exited: stream (exit status 1; not expected)
+2025-09-25 21:52:24,229 INFO spawned: 'stream' with pid 3758
+2025-09-25 21:52:25,240 INFO success: stream entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:52:27,771 INFO reaped unknown pid 3766 (exit status 0)
+2025-09-25 21:52:27,771 INFO reaped unknown pid 3765 (exit status 0)
+2025-09-25 21:52:40,830 INFO exited: monitor (exit status 1; not expected)
+2025-09-25 21:52:40,833 INFO spawned: 'monitor' with pid 3778
+2025-09-25 21:52:41,845 INFO success: monitor entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:52:51,703 INFO reaped unknown pid 3733 (exit status 0)
+2025-09-25 21:52:51,871 INFO exited: stream (exit status 255; not expected)
+2025-09-25 21:52:52,876 INFO spawned: 'stream' with pid 3788
+2025-09-25 21:52:53,912 INFO success: stream entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:52:56,936 INFO reaped unknown pid 3801 (exit status 0)
+2025-09-25 21:52:56,936 INFO reaped unknown pid 3802 (exit status 0)
+2025-09-25 21:52:59,915 INFO reaped unknown pid 3816 (exit status 0)
+2025-09-25 21:52:59,915 INFO reaped unknown pid 3815 (exit status 0)
+2025-09-25 21:53:47,174 INFO exited: stream (exit status 1; not expected)
+2025-09-25 21:53:47,176 INFO spawned: 'stream' with pid 3834
+2025-09-25 21:53:48,217 INFO success: stream entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:53:50,121 INFO exited: monitor (exit status 1; not expected)
+2025-09-25 21:53:50,212 INFO spawned: 'monitor' with pid 3840
+2025-09-25 21:53:51,246 INFO success: monitor entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:53:51,246 INFO reaped unknown pid 3845 (exit status 0)
+2025-09-25 21:53:51,246 INFO reaped unknown pid 3844 (exit status 0)
+2025-09-25 21:54:00,267 INFO reaped unknown pid 3791 (exit status 0)
+2025-09-25 21:54:09,282 INFO reaped unknown pid 3869 (exit status 0)
+2025-09-25 21:54:09,282 INFO reaped unknown pid 3870 (exit status 0)
+2025-09-25 21:54:41,471 INFO exited: stream (exit status 1; not expected)
+2025-09-25 21:54:41,871 INFO spawned: 'stream' with pid 3887
+2025-09-25 21:54:43,369 INFO success: stream entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:54:45,390 INFO reaped unknown pid 3895 (exit status 0)
+2025-09-25 21:54:45,390 INFO reaped unknown pid 3894 (exit status 0)
+2025-09-25 21:54:56,452 INFO exited: monitor (exit status 1; not expected)
+2025-09-25 21:54:56,456 INFO spawned: 'monitor' with pid 3899
+2025-09-25 21:54:57,483 INFO success: monitor entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:55:06,515 INFO exited: stream (exit status 1; not expected)
+2025-09-25 21:55:07,519 INFO spawned: 'stream' with pid 3914
+2025-09-25 21:55:07,519 INFO reaped unknown pid 3862 (exit status 0)
+2025-09-25 21:55:08,539 INFO success: stream entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:55:11,511 INFO reaped unknown pid 3923 (exit status 0)
+2025-09-25 21:55:11,511 INFO reaped unknown pid 3924 (exit status 0)
+2025-09-25 21:55:15,550 INFO reaped unknown pid 3935 (exit status 0)
+2025-09-25 21:55:15,550 INFO reaped unknown pid 3934 (exit status 0)
+2025-09-25 21:56:02,729 INFO exited: monitor (exit status 1; not expected)
+2025-09-25 21:56:02,729 INFO exited: stream (exit status 1; not expected)
+2025-09-25 21:56:02,732 INFO spawned: 'monitor' with pid 3960
+2025-09-25 21:56:02,739 INFO spawned: 'stream' with pid 3961
+2025-09-25 21:56:03,777 INFO success: monitor entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:56:03,777 INFO success: stream entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:56:06,788 INFO reaped unknown pid 3970 (exit status 0)
+2025-09-25 21:56:06,788 INFO reaped unknown pid 3971 (exit status 0)
+2025-09-25 21:56:12,802 INFO reaped unknown pid 3917 (exit status 0)
+2025-09-25 21:56:21,800 INFO reaped unknown pid 3987 (exit status 0)
+2025-09-25 21:56:21,800 INFO reaped unknown pid 3988 (exit status 0)
+2025-09-25 21:56:56,956 INFO exited: stream (exit status 1; not expected)
+2025-09-25 21:56:57,349 INFO spawned: 'stream' with pid 4006
+2025-09-25 21:56:58,355 INFO success: stream entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:57:00,886 INFO reaped unknown pid 4022 (exit status 0)
+2025-09-25 21:57:00,886 INFO reaped unknown pid 4021 (exit status 0)
+2025-09-25 21:57:11,940 INFO exited: monitor (exit status 1; not expected)
+2025-09-25 21:57:11,948 INFO spawned: 'monitor' with pid 4026
+2025-09-25 21:57:12,982 INFO success: monitor entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:57:22,009 INFO exited: stream (exit status 1; not expected)
+2025-09-25 21:57:23,012 INFO spawned: 'stream' with pid 4034
+2025-09-25 21:57:23,014 INFO reaped unknown pid 3981 (exit status 0)
+2025-09-25 21:57:24,033 INFO success: stream entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-25 21:57:27,004 INFO reaped unknown pid 4044 (exit status 0)
+2025-09-25 21:57:27,004 INFO reaped unknown pid 4043 (exit status 0)
+2025-09-25 21:57:31,035 INFO reaped unknown pid 4062 (exit status 0)
+2025-09-25 21:57:31,035 INFO reaped unknown pid 4061 (exit status 0)
+2025-09-25 21:58:17,345 INFO exited: stream (exit status 1; not expected)
