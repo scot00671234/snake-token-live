@@ -1,154 +1,65 @@
-import { games, comments, highScores, gameStats, type Game, type InsertGame, type Comment, type InsertComment, type HighScore, type InsertHighScore, type GameStats } from "../shared/schema.js";
-import { db } from "./db";
-import { eq, desc, and, sql } from "drizzle-orm";
+import { Comment, InsertComment, GameState } from "../shared/schema.js";
+import { nanoid } from "nanoid";
 
 export interface IStorage {
-  // Game methods
-  createGame(game: InsertGame): Promise<Game>;
-  getGame(id: string): Promise<Game | undefined>;
-  updateGame(id: string, updates: Partial<InsertGame>): Promise<Game | undefined>;
-  endGame(id: string, finalScore: number): Promise<Game | undefined>;
-  getActiveGame(): Promise<Game | undefined>;
-  
   // Comment methods
   createComment(comment: InsertComment): Promise<Comment>;
-  getRecentComments(gameId: string, limit?: number): Promise<Comment[]>;
-  getValidCommands(gameId: string, limit?: number): Promise<Comment[]>;
+  getRecentComments(limit?: number): Promise<Comment[]>;
   
-  // High score methods
-  createHighScore(highScore: InsertHighScore): Promise<HighScore>;
-  getTopScores(limit?: number): Promise<HighScore[]>;
-  
-  // Stats methods
-  getGameStats(): Promise<GameStats | undefined>;
-  updateGameStats(stats: Partial<GameStats>): Promise<GameStats>;
+  // Game state methods (in-memory only)
+  getCurrentGameState(): GameState | null;
+  setCurrentGameState(state: GameState | null): void;
 }
 
-export class DatabaseStorage implements IStorage {
-  async createGame(insertGame: InsertGame): Promise<Game> {
-    const [game] = await db
-      .insert(games)
-      .values(insertGame)
-      .returning();
-    return game;
-  }
-
-  async getGame(id: string): Promise<Game | undefined> {
-    const [game] = await db.select().from(games).where(eq(games.id, id));
-    return game || undefined;
-  }
-
-  async updateGame(id: string, updates: Partial<InsertGame>): Promise<Game | undefined> {
-    const [game] = await db
-      .update(games)
-      .set(updates)
-      .where(eq(games.id, id))
-      .returning();
-    return game || undefined;
-  }
-
-  async endGame(id: string, finalScore: number): Promise<Game | undefined> {
-    const [game] = await db
-      .update(games)
-      .set({
-        score: finalScore,
-        isActive: false,
-        endedAt: sql`NOW()`,
-      })
-      .where(eq(games.id, id))
-      .returning();
-    return game || undefined;
-  }
-
-  async getActiveGame(): Promise<Game | undefined> {
-    const [game] = await db
-      .select()
-      .from(games)
-      .where(eq(games.isActive, true))
-      .orderBy(desc(games.createdAt))
-      .limit(1);
-    return game || undefined;
-  }
+export class MemoryStorage implements IStorage {
+  private comments: Comment[] = [];
+  private currentGameState: GameState | null = null;
+  private readonly maxComments = 100; // Keep last 100 comments
 
   async createComment(insertComment: InsertComment): Promise<Comment> {
-    const [comment] = await db
-      .insert(comments)
-      .values(insertComment)
-      .returning();
+    const comment: Comment = {
+      id: nanoid(),
+      username: insertComment.username || 'Anonymous',
+      originalText: insertComment.originalText,
+      command: this.parseCommand(insertComment.originalText),
+      isValid: this.parseCommand(insertComment.originalText) !== 'invalid',
+      createdAt: new Date().toISOString(),
+    };
+
+    this.comments.push(comment);
+    
+    // Keep only the most recent comments to prevent memory issues
+    if (this.comments.length > this.maxComments) {
+      this.comments = this.comments.slice(-this.maxComments);
+    }
+
     return comment;
   }
 
-  async getRecentComments(gameId: string, limit: number = 50): Promise<Comment[]> {
-    return await db
-      .select()
-      .from(comments)
-      .where(eq(comments.gameId, gameId))
-      .orderBy(desc(comments.createdAt))
-      .limit(limit);
+  async getRecentComments(limit: number = 50): Promise<Comment[]> {
+    return this.comments
+      .slice(-limit)
+      .reverse(); // Most recent first
   }
 
-  async getValidCommands(gameId: string, limit: number = 10): Promise<Comment[]> {
-    return await db
-      .select()
-      .from(comments)
-      .where(and(
-        eq(comments.gameId, gameId),
-        eq(comments.isValid, true)
-      ))
-      .orderBy(desc(comments.createdAt))
-      .limit(limit);
+  getCurrentGameState(): GameState | null {
+    return this.currentGameState;
   }
 
-  async createHighScore(insertHighScore: InsertHighScore): Promise<HighScore> {
-    const [highScore] = await db
-      .insert(highScores)
-      .values(insertHighScore)
-      .returning();
-    return highScore;
+  setCurrentGameState(state: GameState | null): void {
+    this.currentGameState = state;
   }
 
-  async getTopScores(limit: number = 10): Promise<HighScore[]> {
-    return await db
-      .select()
-      .from(highScores)
-      .orderBy(desc(highScores.score))
-      .limit(limit);
-  }
-
-  async getGameStats(): Promise<GameStats | undefined> {
-    const [stats] = await db
-      .select()
-      .from(gameStats)
-      .orderBy(desc(gameStats.updatedAt))
-      .limit(1);
-    return stats || undefined;
-  }
-
-  async updateGameStats(updates: Partial<GameStats>): Promise<GameStats> {
-    // First try to update existing stats
-    const existing = await this.getGameStats();
+  private parseCommand(text: string): string {
+    const lowerText = text.toLowerCase().trim();
     
-    if (existing) {
-      const [stats] = await db
-        .update(gameStats)
-        .set({ ...updates, updatedAt: sql`NOW()` })
-        .where(eq(gameStats.id, existing.id))
-        .returning();
-      return stats;
-    } else {
-      // Create new stats if none exist
-      const [stats] = await db
-        .insert(gameStats)
-        .values({
-          totalGames: updates.totalGames || 0,
-          totalComments: updates.totalComments || 0,
-          activePlayers: updates.activePlayers || 0,
-          averageScore: updates.averageScore || 0,
-        })
-        .returning();
-      return stats;
-    }
+    if (lowerText.includes('up')) return 'up';
+    if (lowerText.includes('down')) return 'down';
+    if (lowerText.includes('left')) return 'left';
+    if (lowerText.includes('right')) return 'right';
+    
+    return 'invalid';
   }
 }
 
-export const storage = new DatabaseStorage();
+export const storage = new MemoryStorage();

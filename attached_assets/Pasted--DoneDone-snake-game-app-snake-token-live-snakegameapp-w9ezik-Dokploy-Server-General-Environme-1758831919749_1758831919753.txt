@@ -1,0 +1,123 @@
+
+DoneDone
+snake-game-app
+snake-token-live-snakegameapp-w9ezik
+Dokploy Server
+General
+Environment
+Domains
+Preview Deployments
+Schedules
+Volume Backups
+Deployments
+Logs
+Monitoring
+Advanced
+Logs
+Watch the logs of the application in real time
+
+Select a container to view logs
+Native
+
+
+snake-token-live-snakegameapp-w9ezik.1.lthq2u0rdxkfrcu2liepxshkd (2ea77b4aad07) 
+Search logs...
+hostname: 'localhost',
+port: '5000',
+agent: undefined,
+nativeProtocols: [Object],
+pathname: '/api/pump-fun/start-polling/2ZwUG529hiMr11T7d1zSHzGb1wz5oLA2g22LsfMepump'
+},
+_ended: false,
+_ending: true,
+_redirectCount: 0,
+_redirects: [],
+_requestBodyLength: 49,
+_requestBodyBuffers: [ [Object] ],
+_eventsCount: 3,
+_onNativeResponse: [Function (anonymous)],
+_currentRequest: ClientRequest {
+_events: [Object: null prototype],
+_eventsCount: 7,
+_maxListeners: undefined,
+outputData: [],
+outputSize: 0,
+writable: true,
+destroyed: false,
+_last: false,
+chunkedEncoding: false,
+shouldKeepAlive: true,
+maxRequestsOnConnectionReached: false,
+_defaultKeepAlive: true,
+useChunkedEncodingByDefault: true,
+sendDate: false,
+_removedConnection: false,
+_removedContLen: false,
+_removedTE: false,
+strictContentLength: false,
+_contentLength: '49',
+_hasBody: true,
+_trailer: '',
+finished: false,
+_headerSent: true,
+_closed: false,
+socket: [Socket],
+_header: 'POST /api/pump-fun/start-polling/2ZwUG529hiMr11T7d1zSHzGb1wz5oLA2g22LsfMepump HTTP/1.1\r\n' +
+'Accept: application/json, text/plain, */*\r\n' +
+'Content-Type: application/json\r\n' +
+'User-Agent: axios/1.12.2\r\n' +
+'Content-Length: 49\r\n' +
+'Accept-Encoding: gzip, compress, deflate, br\r\n' +
+'Host: localhost:5000\r\n' +
+'Connection: keep-alive\r\n' +
+'\r\n',
+_keepAliveTimeout: 0,
+_onPendingData: [Function: nop],
+agent: [Agent],
+socketPath: undefined,
+method: 'POST',
+maxHeaderSize: undefined,
+insecureHTTPParser: undefined,
+joinDuplicateHeaders: undefined,
+path: '/api/pump-fun/start-polling/2ZwUG529hiMr11T7d1zSHzGb1wz5oLA2g22LsfMepump',
+_ended: false,
+res: null,
+aborted: false,
+timeoutCb: [Function: emitRequestTimeout],
+upgradeOrConnect: false,
+parser: null,
+maxHeadersCount: null,
+reusedSocket: false,
+host: 'localhost',
+protocol: 'http:',
+_redirectable: [Circular *1],
+[Symbol(shapeMode)]: false,
+[Symbol(kCapture)]: false,
+[Symbol(kBytesWritten)]: 0,
+[Symbol(kNeedDrain)]: false,
+[Symbol(corked)]: 0,
+[Symbol(kOutHeaders)]: [Object: null prototype],
+[Symbol(errored)]: null,
+[Symbol(kHighWaterMark)]: 16384,
+[Symbol(kRejectNonStandardBodyWrites)]: false,
+[Symbol(kUniqueHeaders)]: null
+},
+_currentUrl: 'http://localhost:5000/api/pump-fun/start-polling/2ZwUG529hiMr11T7d1zSHzGb1wz5oLA2g22LsfMepump',
+_timeout: null,
+[Symbol(shapeMode)]: true,
+[Symbol(kCapture)]: false
+},
+[cause]: Error: connect ECONNREFUSED 127.0.0.1:5000
+at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16) {
+errno: -111,
+code: 'ECONNREFUSED',
+syscall: 'connect',
+address: '127.0.0.1',
+port: 5000
+}
+}
+8:24:41 PM [express] GET /api/game/current 200 in 7ms :: {"game":{"id":"77d5177a-973f-43b5-bec5-c675…
+8:24:42 PM [express] GET /api/comments/77d5177a-973f-43b5-bec5-c67515b37c2a 200 in 2ms :: []
+8:24:42 PM [express] GET /api/game/current 304 in 1ms :: {"game":{"id":"77d5177a-973f-43b5-bec5-c675…
+8:24:43 PM [express] GET /api/game/current 304 in 2ms :: {"game":{"id":"77d5177a-973f-43b5-bec5-c675…
+8:24:43 PM [express] GET /api/stats 200 in 2ms :: {"totalGames":0,"totalComments":0,"activePlayers":…
