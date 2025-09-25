@@ -19,6 +19,9 @@ interface GameState {
 let currentGameState: GameState | null = null;
 const connectedClients = new Set<WebSocket>();
 
+// Global polling management to prevent duplicates
+const activePollingIntervals = new Map<string, NodeJS.Timeout>();
+
 export async function registerRoutes(app: Express): Promise<Server> {
   const httpServer = createServer(app);
 
@@ -110,7 +113,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         // Start pump.fun polling automatically
         setTimeout(async () => {
           try {
-            await axios.post(`http://localhost:5000/api/pump-fun/start-polling/${PUMP_FUN_TOKEN}`, {
+            const serviceUrl = process.env.INTERNAL_SERVICE_URL || 'http://localhost:5000';
+            await axios.post(`${serviceUrl}/api/pump-fun/start-polling/${PUMP_FUN_TOKEN}`, {
               gameId: game.id
             }, {
               timeout: 5000
@@ -500,16 +504,62 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: 'Game ID is required' });
       }
 
+      const pollingKey = `${mintAddress}-${gameId}`;
+      
+      // Check if polling is already active for this mint/game
+      if (activePollingIntervals.has(pollingKey)) {
+        console.log(`Polling already active for ${pollingKey}, skipping duplicate`);
+        return res.json({ 
+          success: true, 
+          message: `Polling already active for mint ${mintAddress}`,
+          pollInterval: 3000
+        });
+      }
+
       // Store polling configuration (in production, use a proper job queue)
       console.log(`Starting pump.fun polling for mint: ${mintAddress}, game: ${gameId}`);
+      
+      let consecutiveErrors = 0;
+      const maxConsecutiveErrors = 5;
+      
+      // Restart function with backoff
+      const restartPolling = async (attempt = 1) => {
+        const maxRetries = 3;
+        const baseDelay = 30000; // 30 seconds
+        
+        if (attempt > maxRetries) {
+          console.error(`Failed to restart polling after ${maxRetries} attempts`);
+          return;
+        }
+        
+        const delay = baseDelay * Math.pow(2, attempt - 1); // Exponential backoff
+        console.log(`Attempting to restart polling (${attempt}/${maxRetries}) in ${delay/1000}s...`);
+        
+        setTimeout(async () => {
+          try {
+            const serviceUrl = process.env.INTERNAL_SERVICE_URL || 'http://localhost:5000';
+            await axios.post(`${serviceUrl}/api/pump-fun/start-polling/${mintAddress}`, {
+              gameId
+            }, { timeout: 10000 });
+            console.log('Polling restarted successfully');
+          } catch (restartError) {
+            console.error(`Restart attempt ${attempt} failed:`, restartError);
+            await restartPolling(attempt + 1);
+          }
+        }, delay);
+      };
       
       // For MVP, we'll set up a simple interval to poll comments
       const pollInterval = setInterval(async () => {
         try {
           // Use our internal API endpoint with fallback strategies
-          const response = await axios.get(`http://localhost:5000/api/pump-fun/comments/${mintAddress}`, {
+          const serviceUrl = process.env.INTERNAL_SERVICE_URL || 'http://localhost:5000';
+          const response = await axios.get(`${serviceUrl}/api/pump-fun/comments/${mintAddress}`, {
             timeout: 5000
           });
+          
+          // Reset error counter on successful request
+          consecutiveErrors = 0;
           
           const comments = response.data;
           if (comments && comments.length > 0) {
@@ -535,13 +585,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 });
                 
                 // Store comment in our database
-                await storage.createComment({
-                  gameId,
-                  username: comment.username,
-                  originalText: comment.originalText,
-                  command: comment.command,
-                  isValid: true
-                });
+                try {
+                  await storage.createComment({
+                    gameId,
+                    username: comment.username,
+                    originalText: comment.originalText,
+                    command: comment.command,
+                    isValid: true
+                  });
+                } catch (dbError) {
+                  console.error('Database error storing comment:', dbError);
+                  // Don't stop processing due to DB errors
+                }
                 
                 // Break after processing first valid command to avoid rapid direction changes
                 break;
@@ -549,17 +604,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
             }
           }
         } catch (error) {
-          console.error('Error in pump.fun polling:', error);
+          consecutiveErrors++;
+          console.error(`Error in pump.fun polling (${consecutiveErrors}/${maxConsecutiveErrors}):`, error);
+          
+          // If too many consecutive errors, clear the interval and restart polling
+          if (consecutiveErrors >= maxConsecutiveErrors) {
+            console.error('Too many consecutive errors, clearing interval and restarting...');
+            clearInterval(pollInterval);
+            activePollingIntervals.delete(pollingKey);
+            
+            // Start restart process with exponential backoff
+            await restartPolling();
+          }
         }
       }, 3000); // Poll every 3 seconds for faster response
       
-      // In production, store this interval ID in a database or cache
-      // For MVP, we'll let it run indefinitely
+      // Store the interval for management
+      activePollingIntervals.set(pollingKey, pollInterval);
       
       res.json({ 
         success: true, 
         message: `Started polling pump.fun for mint ${mintAddress}`,
-        pollInterval: 5000
+        pollInterval: 3000
       });
     } catch (error) {
       console.error('Error starting pump.fun polling:', error);

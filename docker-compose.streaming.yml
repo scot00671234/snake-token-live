@@ -28,7 +28,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    command: ["npm", "run", "db:push", "--force"]
+    command: ["npm", "run", "db:push"]
     networks:
       - snake-network
     restart: "no"  # Run only once
@@ -41,6 +41,7 @@ services:
     environment:
       - NODE_ENV=production
       - DATABASE_URL=postgresql://${POSTGRES_USER:-snake_user}:${POSTGRES_PASSWORD:-secure_snake_prod_password_2024}@postgres:5432/${POSTGRES_DB:-snakedb}
+      - INTERNAL_SERVICE_URL=http://snake-app:5000
       - REPLIT_KEEP_PACKAGE_DEV_DEPENDENCIES=1
       - REPLIT_DISABLE_PACKAGE_LAYER=1
     depends_on:
@@ -54,6 +55,7 @@ services:
       timeout: 10s
       retries: 5
       start_period: 60s  # Give more time for production startup
+    restart: unless-stopped
     networks:
       - snake-network
 
@@ -78,6 +80,12 @@ services:
     networks:
       - snake-network
     user: "root"  # Required for X11 access, consider non-root alternatives
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep ffmpeg && pgrep chromium && curl -f -s --max-time 5 http://snake-app:5000/api/stats && xwininfo -display :1 -root > /dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
 
 volumes:
   postgres_data:
